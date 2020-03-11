@@ -1,0 +1,18 @@
+.container {
+  width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.textContent {
+  background-color: #888888;
+}
+
+.keyboard {
+  border: 3px solid black;
+  background: #888888;
+}
+
+.key {
+  display: inline-block;
+}
