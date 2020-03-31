@@ -1034,6 +1034,10 @@ const changeCaseCycle = (up, down) => {
   }
 }
 
+const tab = (contentTextArea) => { contentTextArea.value += '    ' }
+
+const backSpace = (contentTextArea) => { contentTextArea.value = contentTextArea.value.slice(0, -1) }
+
 const changeLang = () => {
   const rus = document.getElementsByClassName('rus')
   const eng = document.getElementsByClassName('eng')
@@ -1219,16 +1223,20 @@ const typeText = () => {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') {
       e.preventDefault()
-      contentTextArea.value += '    '
+      tab(contentTextArea)
     }
 
     if (isFocus === false) {
-      if (e.key === 'Backspace') { contentTextArea.value = contentTextArea.value.slice(0, -1) }
+      if (e.key === 'Backspace') { backSpace(contentTextArea) }
     }
   })
 
   document.addEventListener('click', (e) => {
     let clickedItem = e.target.classList[0]
+
+    if (e.target.innerText === 'Backspace') { backSpace(contentTextArea) }
+
+    if (e.target.innerText === 'Tab') { tab(contentTextArea) }
 
     if (e.target.innerText === 'CapsLock') { changeCaseCycle(up, down) }
 
