@@ -1,6 +1,7 @@
 body {
   margin: 0;
   background: linear-gradient(45deg, #EECFBA, #C5DDE8);
+  font-family: 'Trebuchet MS', Arial, sans-serif;
 }
 
 .container {
@@ -16,8 +17,14 @@ body {
 .textContent textarea {
   width: 800px;
   height: 300px;
+  padding: 10px;
   border: 3px solid black;
   border-radius: 5px;
+  box-sizing: border-box;
+  background: #888888;
+  color: white;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-size: 18px;
 }
 
 .keyboard {
