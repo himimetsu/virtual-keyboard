@@ -1027,6 +1027,13 @@ const state = {
   ]
 }
 
+const changeCaseCycle = (up, down) => {
+  for (let i = 0; i < up.length; i++) {
+    up[i].classList.toggle('hidden')
+    down[i].classList.toggle('hidden')
+  }
+}
+
 const changeLang = () => {
   const rus = document.getElementsByClassName('rus')
   const eng = document.getElementsByClassName('eng')
@@ -1083,11 +1090,9 @@ const changeCase = () => {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Shift') {
       if (!isShiftPressed) {
-        for (let i = 0; i < up.length; i++) {
-          up[i].classList.toggle('hidden')
-          down[i].classList.toggle('hidden')
-        }
+        changeCaseCycle(up, down)
       }
+
       isShiftPressed = true
     }
   })
@@ -1095,17 +1100,11 @@ const changeCase = () => {
   document.onkeyup = (e) => {
     if (e.key === 'Shift') {
       isShiftPressed = false
-      for (let i = 0; i < up.length; i++) {
-        up[i].classList.toggle('hidden')
-        down[i].classList.toggle('hidden')
-      }
+      changeCaseCycle(up, down)
     }
 
     if (e.code == 'CapsLock') {
-      for (let i = 0; i < up.length; i++) {
-        up[i].classList.toggle('hidden')
-        down[i].classList.toggle('hidden')
-      }
+      changeCaseCycle(up, down)
     }
   }
 }
@@ -1186,6 +1185,9 @@ const renderContainer = () => {
 }
 
 const typeText = () => {
+  const up = document.getElementsByClassName('up')
+  const down = document.getElementsByClassName('down')
+
   let contentTextArea = document.getElementsByClassName('textarea')[0]
   let isFocus = false
 
