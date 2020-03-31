@@ -60,6 +60,11 @@ body {
   background: #444444;
   border-radius: 5px;
   user-select: none;
+  cursor: pointer;
+}
+
+.key:hover {
+  background-color: #58FAAC;
 }
 
 .Tab, .Backspace, .CapsLock, .ShiftLeft, .ShiftRight, .Enter {
