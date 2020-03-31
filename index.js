@@ -1230,6 +1230,8 @@ const typeText = () => {
   document.addEventListener('click', (e) => {
     let clickedItem = e.target.classList[0]
 
+    if (e.target.innerText === 'CapsLock') { changeCaseCycle(up, down) }
+
     if (e.toElement.classList[1] === 'Space') { contentTextArea.value += ' ' }
 
     if (clickedItem === 'down' || clickedItem === 'up' || clickedItem === 'key') {
