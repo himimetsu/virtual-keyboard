@@ -1234,13 +1234,20 @@ const typeText = () => {
   document.addEventListener('click', (e) => {
     let clickedItem = e.target.classList[0]
 
-    if (e.target.innerText === 'Backspace') { backSpace(contentTextArea) }
-
-    if (e.target.innerText === 'Tab') { tab(contentTextArea) }
-
-    if (e.target.innerText === 'CapsLock') { changeCaseCycle(up, down) }
-
-    if (e.toElement.classList[1] === 'Space') { contentTextArea.value += ' ' }
+    switch (e.target.innerText) {
+      case 'Backspace':
+        backSpace(contentTextArea)
+        break;
+      case 'Tab':
+        tab(contentTextArea)
+        break;
+      case 'CapsLock':
+        changeCaseCycle(up, down)
+        break;
+      case 'Space':
+        contentTextArea.value += ' '
+        break;
+    }
 
     if (clickedItem === 'down' || clickedItem === 'up' || clickedItem === 'key') {
       let currentSymbol = e.toElement.innerText
