@@ -1,4 +1,12 @@
-const state1 = {
+window.onload = function () {
+  renderContainer()
+  typeText()
+  changeLang()
+  changeCase()
+  activePressKey()
+}
+
+const state = {
   row1: [
     {
       name: 'Backquote',
@@ -232,18 +240,18 @@ const state1 = {
       content: [
         {
           lang: 'rus',
-          down: 'tab',
+          down: 'Tab',
           up: 'Tab',
         },
         {
           lang: 'eng',
-          down: 'tab',
+          down: 'Tab',
           up: 'Tab',
         }
       ],
     },
     {
-      name: 'Q',
+      name: 'KeyQ',
       code: 'KeyQ',
       content: [
         {
@@ -259,7 +267,7 @@ const state1 = {
       ],
     },
     {
-      name: 'W',
+      name: 'KeyW',
       code: 'KeyW',
       content: [
         {
@@ -275,7 +283,7 @@ const state1 = {
       ],
     },
     {
-      name: 'E',
+      name: 'KeyE',
       code: 'KeyE',
       content: [
         {
@@ -291,7 +299,7 @@ const state1 = {
       ],
     },
     {
-      name: 'R',
+      name: 'KeyR',
       code: 'KeyR',
       content: [
         {
@@ -307,7 +315,7 @@ const state1 = {
       ],
     },
     {
-      name: 'T',
+      name: 'KeyT',
       code: 'KeyT',
       content: [
         {
@@ -323,7 +331,7 @@ const state1 = {
       ],
     },
     {
-      name: 'Y',
+      name: 'KeyY',
       code: 'KeyY',
       content: [
         {
@@ -339,7 +347,7 @@ const state1 = {
       ],
     },
     {
-      name: 'U',
+      name: 'KeyU',
       code: 'KeyU',
       content: [
         {
@@ -355,8 +363,8 @@ const state1 = {
       ],
     },
     {
-      name: 'I',
-      code: 'i',
+      name: 'KeyI',
+      code: 'KeyI',
       content: [
         {
           lang: 'rus',
@@ -371,7 +379,7 @@ const state1 = {
       ],
     },
     {
-      name: 'O',
+      name: 'KeyO',
       code: 'KeyO',
       content: [
         {
@@ -387,7 +395,7 @@ const state1 = {
       ],
     },
     {
-      name: 'P',
+      name: 'KeyP',
       code: 'KeyP',
       content: [
         {
@@ -441,28 +449,682 @@ const state1 = {
         {
           lang: 'rus',
           down: '\\',
-          up: '//',
+          up: '/',
         },
         {
           lang: 'eng',
           down: '\\',
-          up: '||',
+          up: '|',
+        }
+      ],
+    },
+  ],
+  row3: [
+    {
+      name: 'CapsLock',
+      code: 'CapsLock',
+      content: [
+        {
+          lang: 'rus',
+          down: 'CapsLock',
+          up: 'CapsLock',
+        },
+        {
+          lang: 'eng',
+          down: 'CapsLock',
+          up: 'CapsLock',
+        }
+      ],
+    },
+    {
+      name: 'KeyA',
+      code: 'KeyA',
+      content: [
+        {
+          lang: 'rus',
+          down: 'ф',
+          up: 'Ф',
+        },
+        {
+          lang: 'eng',
+          down: 'a',
+          up: 'A',
+        }
+      ],
+    },
+    {
+      name: 'KeyS',
+      code: 'KeyS',
+      content: [
+        {
+          lang: 'rus',
+          down: 'ы',
+          up: 'Ы',
+        },
+        {
+          lang: 'eng',
+          down: 's',
+          up: 'S',
+        }
+      ],
+    },
+    {
+      name: 'KeyD',
+      code: 'KeyD',
+      content: [
+        {
+          lang: 'rus',
+          down: 'в',
+          up: 'В',
+        },
+        {
+          lang: 'eng',
+          down: 'd',
+          up: 'D',
+        }
+      ],
+    },
+    {
+      name: 'KeyF',
+      code: 'KeyF',
+      content: [
+        {
+          lang: 'rus',
+          down: 'а',
+          up: 'А',
+        },
+        {
+          lang: 'eng',
+          down: 'f',
+          up: 'F',
+        }
+      ],
+    },
+    {
+      name: 'KeyG',
+      code: 'KeyG',
+      content: [
+        {
+          lang: 'rus',
+          down: 'п',
+          up: 'П',
+        },
+        {
+          lang: 'eng',
+          down: 'g',
+          up: 'G',
+        }
+      ],
+    },
+    {
+      name: 'KeyH',
+      code: 'KeyH',
+      content: [
+        {
+          lang: 'rus',
+          down: 'р',
+          up: 'Р',
+        },
+        {
+          lang: 'eng',
+          down: 'h',
+          up: 'H',
+        }
+      ],
+    },
+    {
+      name: 'KeyJ',
+      code: 'KeyJ',
+      content: [
+        {
+          lang: 'rus',
+          down: 'о',
+          up: 'О',
+        },
+        {
+          lang: 'eng',
+          down: 'j',
+          up: 'J',
+        }
+      ],
+    },
+    {
+      name: 'KeyK',
+      code: 'KeyK',
+      content: [
+        {
+          lang: 'rus',
+          down: 'л',
+          up: 'Л',
+        },
+        {
+          lang: 'eng',
+          down: 'k',
+          up: 'K',
+        }
+      ],
+    },
+    {
+      name: 'KeyL',
+      code: 'KeyL',
+      content: [
+        {
+          lang: 'rus',
+          down: 'д',
+          up: 'Д',
+        },
+        {
+          lang: 'eng',
+          down: 'l',
+          up: 'L',
+        }
+      ],
+    },
+    {
+      name: 'Semicolon',
+      code: 'Semicolon',
+      content: [
+        {
+          lang: 'rus',
+          down: 'ж',
+          up: 'Ж',
+        },
+        {
+          lang: 'eng',
+          down: ';',
+          up: ':',
+        }
+      ],
+    },
+    {
+      name: 'Quote',
+      code: 'Quote',
+      content: [
+        {
+          lang: 'rus',
+          down: 'э',
+          up: 'Э',
+        },
+        {
+          lang: 'eng',
+          down: "'",
+          up: '"',
+        }
+      ],
+    },
+    {
+      name: 'Enter',
+      code: 'Enter',
+      content: [
+        {
+          lang: 'rus',
+          down: 'Enter',
+          up: 'Enter',
+        },
+        {
+          lang: 'eng',
+          down: 'Enter',
+          up: 'Enter',
+        }
+      ],
+    },
+  ],
+  row4: [
+    {
+      name: 'ShiftLeft',
+      code: 'ShiftLeft',
+      content: [
+        {
+          lang: 'rus',
+          down: 'Shift',
+          up: 'Shift',
+        },
+        {
+          lang: 'eng',
+          down: 'Shift',
+          up: 'Shift',
+        }
+      ],
+    },
+    {
+      name: 'KeyZ',
+      code: 'KeyZ',
+      content: [
+        {
+          lang: 'rus',
+          down: 'я',
+          up: 'Я',
+        },
+        {
+          lang: 'eng',
+          down: 'z',
+          up: 'Z',
+        }
+      ],
+    },
+    {
+      name: 'KeyX',
+      code: 'KeyX',
+      content: [
+        {
+          lang: 'rus',
+          down: 'ч',
+          up: 'Ч',
+        },
+        {
+          lang: 'eng',
+          down: 'x',
+          up: 'X',
+        }
+      ],
+    },
+    {
+      name: 'KeyC',
+      code: 'KeyC',
+      content: [
+        {
+          lang: 'rus',
+          down: 'с',
+          up: 'С',
+        },
+        {
+          lang: 'eng',
+          down: 'c',
+          up: 'C',
+        }
+      ],
+    },
+    {
+      name: 'KeyV',
+      code: 'KeyV',
+      content: [
+        {
+          lang: 'rus',
+          down: 'м',
+          up: 'М',
+        },
+        {
+          lang: 'eng',
+          down: 'v',
+          up: 'V',
+        }
+      ],
+    },
+    {
+      name: 'KeyB',
+      code: 'KeyB',
+      content: [
+        {
+          lang: 'rus',
+          down: 'и',
+          up: 'И',
+        },
+        {
+          lang: 'eng',
+          down: 'b',
+          up: 'B',
+        }
+      ],
+    },
+    {
+      name: 'KeyN',
+      code: 'KeyN',
+      content: [
+        {
+          lang: 'rus',
+          down: 'т',
+          up: 'Т',
+        },
+        {
+          lang: 'eng',
+          down: 'n',
+          up: 'N',
+        }
+      ],
+    },
+    {
+      name: 'KeyM',
+      code: 'KeyM',
+      content: [
+        {
+          lang: 'rus',
+          down: 'ь',
+          up: 'Ь',
+        },
+        {
+          lang: 'eng',
+          down: 'm',
+          up: 'M',
+        }
+      ],
+    },
+    {
+      name: 'Comma',
+      code: 'Comma',
+      content: [
+        {
+          lang: 'rus',
+          down: 'б',
+          up: 'Б',
+        },
+        {
+          lang: 'eng',
+          down: ',',
+          up: '<',
+        }
+      ],
+    },
+    {
+      name: 'Period',
+      code: 'Period',
+      content: [
+        {
+          lang: 'rus',
+          down: 'ю',
+          up: 'Ю',
+        },
+        {
+          lang: 'eng',
+          down: '.',
+          up: '>',
+        }
+      ],
+    },
+    {
+      name: 'Slash',
+      code: 'Slash',
+      content: [
+        {
+          lang: 'rus',
+          down: '.',
+          up: ',',
+        },
+        {
+          lang: 'eng',
+          down: '/',
+          up: '?',
+        }
+      ],
+    },
+    {
+      name: 'ArrowUp',
+      code: 'ArrowUp',
+      content: [
+        {
+          lang: 'rus',
+          down: '▲',
+          up: '▲',
+        },
+        {
+          lang: 'eng',
+          down: '▲',
+          up: '▲',
+        }
+      ],
+    },
+    {
+      name: 'ShiftRight',
+      code: 'ShiftRight',
+      content: [
+        {
+          lang: 'rus',
+          down: 'Shift',
+          up: 'Shift',
+        },
+        {
+          lang: 'eng',
+          down: 'Shift',
+          up: 'Shift',
+        }
+      ],
+    },
+  ],
+  row5: [
+    {
+      name: 'ControlLeft',
+      code: 'ControlLeft',
+      content: [
+        {
+          lang: 'rus',
+          down: 'Ctrl',
+          up: 'Ctrl',
+        },
+        {
+          lang: 'eng',
+          down: 'Ctrl',
+          up: 'Ctrl',
+        }
+      ],
+    },
+    {
+      name: 'MetaLeft',
+      code: 'MetaLeft',
+      content: [
+        {
+          lang: 'rus',
+          down: 'Win',
+          up: 'Win',
+        },
+        {
+          lang: 'eng',
+          down: 'Win',
+          up: 'Win',
+        }
+      ],
+    },
+    {
+      name: 'AltLeft',
+      code: 'AltLeft',
+      content: [
+        {
+          lang: 'rus',
+          down: 'Alt',
+          up: 'Alt',
+        },
+        {
+          lang: 'eng',
+          down: 'Alt',
+          up: 'Alt',
+        }
+      ],
+    },
+    {
+      name: 'Space',
+      code: 'Space',
+      content: [
+        {
+          lang: 'rus',
+          down: ' ',
+          up: ' ',
+        },
+        {
+          lang: 'eng',
+          down: ' ',
+          up: ' ',
+        }
+      ],
+    },
+    {
+      name: 'AltRight',
+      code: 'AltRight',
+      content: [
+        {
+          lang: 'rus',
+          down: 'Alt',
+          up: 'Alt',
+        },
+        {
+          lang: 'eng',
+          down: 'Alt',
+          up: 'Alt',
+        }
+      ],
+    },
+    {
+      name: 'ArrowLeft',
+      code: 'ArrowLeft',
+      content: [
+        {
+          lang: 'rus',
+          down: '◄',
+          up: '◄',
+        },
+        {
+          lang: 'eng',
+          down: '◄',
+          up: '◄',
+        }
+      ],
+    },
+    {
+      name: 'ArrowDown',
+      code: 'ArrowDown',
+      content: [
+        {
+          lang: 'rus',
+          down: '▼',
+          up: '▼',
+        },
+        {
+          lang: 'eng',
+          down: '▼',
+          up: '▼',
+        }
+      ],
+    },
+    {
+      name: 'ArrowRight',
+      code: 'ArrowRight',
+      content: [
+        {
+          lang: 'rus',
+          down: '►',
+          up: '►',
+        },
+        {
+          lang: 'eng',
+          down: '►',
+          up: '►',
+        }
+      ],
+    },
+    {
+      name: 'ControlRight',
+      code: 'ControlRight',
+      content: [
+        {
+          lang: 'rus',
+          down: 'Ctrl',
+          up: 'Ctrl',
+        },
+        {
+          lang: 'eng',
+          down: 'Ctrl',
+          up: 'Ctrl',
         }
       ],
     },
   ]
 }
 
-window.onload = function () {
-  console.log('Дом дерево загрузилось!')
-  renderContainer()
+const changeLang = () => {
+  const rus = document.getElementsByClassName('rus')
+  const eng = document.getElementsByClassName('eng')
+
+  let currentLang
+  let set = new Set
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Alt') { event.preventDefault() }
+
+    if (event.key == 'Shift' || event.key == 'Alt') { set.add(event.key) }
+
+    if (set.size == 2) {
+      for (let i = 0; i < rus.length; i++) {
+        rus[i].classList.toggle('hidden')
+        eng[i].classList.toggle('hidden')
+        rus[i].classList.toggle('show')
+        eng[i].classList.toggle('show')
+      }
+      set = new Set
+      currentLang = document.getElementsByClassName('show')[0].classList[0]
+      sessionStorage.setItem('language', currentLang)
+    }
+  })
+
+  if (sessionStorage.getItem('language')) {
+    switch (sessionStorage.getItem('language')) {
+      case 'rus':
+        for (let i = 0; i < rus.length; i++) {
+          rus[i].classList.add('show')
+          rus[i].classList.remove('hidden')
+          eng[i].classList.add('hidden')
+          eng[i].classList.remove('show')
+        }
+        break;
+      case 'eng':
+        for (let i = 0; i < rus.length; i++) {
+          eng[i].classList.add('show')
+          eng[i].classList.remove('hidden')
+          rus[i].classList.add('hidden')
+          rus[i].classList.remove('show')
+        }
+        break;
+    }
+  }
 }
 
-renderContainer = () => {
+const changeCase = () => {
+  const up = document.getElementsByClassName('up')
+  const down = document.getElementsByClassName('down')
+
+  let isShiftPressed = false
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Shift') {
+      if (!isShiftPressed) {
+        for (let i = 0; i < up.length; i++) {
+          up[i].classList.toggle('hidden')
+          down[i].classList.toggle('hidden')
+        }
+      }
+      isShiftPressed = true
+    }
+  })
+
+  document.onkeyup = (e) => {
+    if (e.key === 'Shift') {
+      isShiftPressed = false
+      for (let i = 0; i < up.length; i++) {
+        up[i].classList.toggle('hidden')
+        down[i].classList.toggle('hidden')
+      }
+    }
+
+    if (e.code == 'CapsLock') {
+      for (let i = 0; i < up.length; i++) {
+        up[i].classList.toggle('hidden')
+        down[i].classList.toggle('hidden')
+      }
+    }
+  }
+}
+
+const activePressKey = () => {
+  document.addEventListener('keydown', (e) => {
+    let currentClick = document.getElementsByClassName(e.code)
+    currentClick[0].classList.add('active')
+  })
+
+  document.addEventListener('keyup', (e) => {
+    let currentClick = document.getElementsByClassName(e.code)
+    currentClick[0].classList.remove('active')
+  })
+}
+
+const renderContainer = () => {
   const container = document.createElement('div')
   container.classList.add('container')
-  const textContainer = document.createTextNode('Container')
-  container.appendChild(textContainer)
   document.body.appendChild(container)
 
   const textContent = document.createElement('div')
@@ -478,12 +1140,12 @@ renderContainer = () => {
   keyboard.classList.add('keyboard')
   container.appendChild(keyboard)
 
-  for (let key in state1) {
+  for (let key in state) {
     const row = document.createElement('div')
-    row.classList.add(`${key}`)
+    row.classList.add('row')
     keyboard.appendChild(row)
 
-    state1[key].map((item) => {
+    state[key].map((item) => {
       const key = document.createElement('div')
       key.classList.add('key')
       key.classList.add(item.name)
@@ -491,10 +1153,12 @@ renderContainer = () => {
 
       const rus = document.createElement('span')
       rus.classList.add('rus')
+      rus.classList.add('hidden')
       key.appendChild(rus)
 
       const eng = document.createElement('span')
       eng.classList.add('eng')
+      eng.classList.add('show')
       key.appendChild(eng)
 
       for (let i = 0; i < item.content.length; i++) {
@@ -505,6 +1169,7 @@ renderContainer = () => {
 
         const up = document.createElement('span')
         up.classList.add('up')
+        up.classList.add('hidden')
         const upText = document.createTextNode(item.content[i].up)
         up.appendChild(upText)
 
@@ -518,4 +1183,56 @@ renderContainer = () => {
       }
     })
   }
+}
+
+const typeText = () => {
+  let contentTextArea = document.getElementsByClassName('textarea')[0]
+  let isFocus = false
+
+  document.getElementsByTagName('textarea')[0].onfocus = () => { isFocus = true }
+  contentTextArea.addEventListener('blur', () => { isFocus = false })
+
+  document.addEventListener('keypress', (e) => {
+    let keyCode = e.code
+    let childsKey = Array.from(document.getElementsByClassName(`${keyCode}`)[0].children)
+    let currentPressKey
+    childsKey.map((item, i) => {
+      if (item.classList[1] === 'show') {
+        currentPressKey = childsKey[i].innerText
+      }
+    })
+
+    if (currentPressKey.length > 1) { currentPressKey = '' }
+
+    if (e.code === 'Space') { contentTextArea.value += ' ' }
+
+    if (isFocus === false) {
+      contentTextArea.value += currentPressKey
+    } else {
+      e.preventDefault()
+      contentTextArea.value += currentPressKey
+    }
+  })
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+      e.preventDefault()
+      contentTextArea.value += '    '
+    }
+
+    if (isFocus === false) {
+      if (e.key === 'Backspace') { contentTextArea.value = contentTextArea.value.slice(0, -1) }
+    }
+  })
+
+  document.addEventListener('click', (e) => {
+    let clickedItem = e.target.classList[0]
+
+    if (e.toElement.classList[1] === 'Space') { contentTextArea.value += ' ' }
+
+    if (clickedItem === 'down' || clickedItem === 'up' || clickedItem === 'key') {
+      let currentSymbol = e.toElement.innerText
+      if (currentSymbol.length == 1) { contentTextArea.value += currentSymbol }
+    }
+  })
 }
