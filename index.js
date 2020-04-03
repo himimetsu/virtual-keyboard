@@ -1212,6 +1212,8 @@ const typeText = () => {
 
     if (e.code === 'Space') { contentTextArea.value += ' ' }
 
+    if (e.code === 'Enter') { contentTextArea.value += '\n' }
+
     if (isFocus === false) {
       contentTextArea.value += currentPressKey
     } else {
@@ -1246,6 +1248,9 @@ const typeText = () => {
         break;
       case 'Space':
         contentTextArea.value += ' '
+        break;
+      case 'Enter':
+        contentTextArea.value += '\n'
         break;
     }
 
