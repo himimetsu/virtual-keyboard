@@ -1064,12 +1064,10 @@ const changeLang = () => {
 
   let selectedSymbol
 
-  document.addEventListener('click', (e) => {
-    if (e.target.classList[0] === 'textarea') {selectedSymbol = e.target.selectionStart}
-  })
-
   document.addEventListener('keydown', (event) => {
     let contentTextArea = document.getElementsByClassName('textarea')[0]
+
+    selectedSymbol = contentTextArea.selectionStart
 
     switch (event.code) {
       case 'Enter':
