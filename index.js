@@ -4,6 +4,7 @@ window.onload = function () {
   changeLang()
   changeCase()
   activePressKey()
+  spec()
 }
 
 const state = {
@@ -455,6 +456,22 @@ const state = {
           lang: 'eng',
           down: '\\',
           up: '|',
+        }
+      ],
+    },
+    {
+      name: 'Delete',
+      code: 'Delete',
+      content: [
+        {
+          lang: 'rus',
+          down: 'Del',
+          up: 'Del',
+        },
+        {
+          lang: 'eng',
+          down: 'Del',
+          up: 'Del',
         }
       ],
     },
@@ -1036,8 +1053,6 @@ const changeCaseCycle = (up, down) => {
 
 const tab = (contentTextArea) => { contentTextArea.value += '    ' }
 
-const backSpace = (contentTextArea) => { contentTextArea.value = contentTextArea.value.slice(0, -1) }
-
 const changeLang = () => {
   const rus = document.getElementsByClassName('rus')
   const eng = document.getElementsByClassName('eng')
@@ -1045,7 +1060,46 @@ const changeLang = () => {
   let currentLang
   let set = new Set
 
+  let selectedSymbol
+
+  document.addEventListener('click', (e) => {
+    if (e.target.classList[0] === 'textarea') {
+      selectedSymbol = e.target.selectionStart
+    }
+  })
+
   document.addEventListener('keydown', (event) => {
+    let contentTextArea = document.getElementsByClassName('textarea')[0]
+
+    switch (event.code) {
+      case 'Enter':
+        event.preventDefault()
+        contentTextArea.value += '\n'
+        console.log('enter')
+        break;
+      case 'Space':
+        event.preventDefault()
+        contentTextArea.value += ' '
+        console.log('space')
+        break;
+      case 'Backspace':
+        event.preventDefault()
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart - 1) + contentTextArea.value.substring(contentTextArea.selectionStart)
+        contentTextArea.focus()
+        contentTextArea.selectionStart = selectedSymbol - 1
+        contentTextArea.selectionEnd = selectedSymbol - 1
+        break;
+      case 'Delete':
+        event.preventDefault()
+        contentTextArea.value = contentTextArea.value.replace(contentTextArea.value[selectedSymbol], '')
+        console.log('delete')
+        break;
+      case 'Tab':
+        event.preventDefault()
+        console.log('tab')
+        break;
+    }
+
     if (event.key === 'Alt') { event.preventDefault() }
 
     if (event.key == 'Shift' || event.key == 'Alt') { set.add(event.key) }
@@ -1189,9 +1243,6 @@ const renderContainer = () => {
 }
 
 const typeText = () => {
-  const up = document.getElementsByClassName('up')
-  const down = document.getElementsByClassName('down')
-
   let contentTextArea = document.getElementsByClassName('textarea')[0]
   let isFocus = false
 
@@ -1200,8 +1251,11 @@ const typeText = () => {
 
   document.addEventListener('keypress', (e) => {
     let keyCode = e.code
+
     let childsKey = Array.from(document.getElementsByClassName(`${keyCode}`)[0].children)
+
     let currentPressKey
+
     childsKey.map((item, i) => {
       if (item.classList[1] === 'show') {
         currentPressKey = childsKey[i].innerText
@@ -1210,35 +1264,42 @@ const typeText = () => {
 
     if (currentPressKey.length > 1) { currentPressKey = '' }
 
-    if (e.code === 'Space') { contentTextArea.value += ' ' }
-
-    if (e.code === 'Enter') { contentTextArea.value += '\n' }
-
     if (isFocus === false) {
       contentTextArea.value += currentPressKey
     } else {
-      e.preventDefault()
+      // e.preventDefault()
       contentTextArea.value += currentPressKey
-    }
-  })
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Tab') {
-      e.preventDefault()
-      tab(contentTextArea)
-    }
-
-    if (isFocus === false) {
-      if (e.key === 'Backspace') { backSpace(contentTextArea) }
     }
   })
 
   document.addEventListener('click', (e) => {
     let clickedItem = e.target.classList[0]
 
+    if (clickedItem === 'down' || clickedItem === 'up' || clickedItem === 'key') {
+      let currentSymbol = e.toElement.innerText
+      if (currentSymbol.length == 1) { contentTextArea.value += currentSymbol }
+    }
+  })
+}
+
+const spec = () => {
+  const up = document.getElementsByClassName('up')
+  const down = document.getElementsByClassName('down')
+
+  document.addEventListener('click', (e) => {
+    let contentTextArea = document.getElementsByClassName('textarea')[0]
+    let selectedSymbol = contentTextArea.selectionStart
     switch (e.target.innerText) {
       case 'Backspace':
-        backSpace(contentTextArea)
+        selectedSymbol = contentTextArea.selectionStart
+        if (selectedSymbol > 0) {
+          contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart - 1) + contentTextArea.value.substring(contentTextArea.selectionStart)
+          contentTextArea.focus()
+          contentTextArea.selectionStart = selectedSymbol - 1
+          contentTextArea.selectionEnd = selectedSymbol - 1
+        } else {
+          contentTextArea.focus()
+        }
         break;
       case 'Tab':
         tab(contentTextArea)
@@ -1252,11 +1313,13 @@ const typeText = () => {
       case 'Enter':
         contentTextArea.value += '\n'
         break;
-    }
-
-    if (clickedItem === 'down' || clickedItem === 'up' || clickedItem === 'key') {
-      let currentSymbol = e.toElement.innerText
-      if (currentSymbol.length == 1) { contentTextArea.value += currentSymbol }
+      case 'Del':
+        selectedSymbol = contentTextArea.selectionStart
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + contentTextArea.value.substring(contentTextArea.selectionStart + 1)
+        contentTextArea.focus()
+        contentTextArea.selectionStart = selectedSymbol
+        contentTextArea.selectionEnd = selectedSymbol
+        break;
     }
   })
 }
