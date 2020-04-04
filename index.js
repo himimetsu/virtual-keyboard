@@ -4,7 +4,7 @@ window.onload = function () {
   changeLang()
   changeCase()
   activePressKey()
-  spec()
+  keyClick()
 }
 
 const state = {
@@ -1215,12 +1215,12 @@ const changeCase = () => {
 const activePressKey = () => {
   document.addEventListener('keydown', (e) => {
     let currentClick = document.getElementsByClassName(e.code)
-    currentClick[0].classList.add('active')
+    if (currentClick.length > 0) { currentClick[0].classList.add('active') }
   })
 
   document.addEventListener('keyup', (e) => {
     let currentClick = document.getElementsByClassName(e.code)
-    currentClick[0].classList.remove('active')
+    if (currentClick.length > 0) { currentClick[0].classList.remove('active') }
   })
 }
 
@@ -1356,7 +1356,7 @@ const typeText = () => {
   })
 }
 
-const spec = () => {
+const keyClick = () => {
   const up = document.getElementsByClassName('up')
   const down = document.getElementsByClassName('down')
 
