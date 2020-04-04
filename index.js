@@ -1055,15 +1055,17 @@ const changeLang = () => {
   const rus = document.getElementsByClassName('rus')
   const eng = document.getElementsByClassName('eng')
 
+  const oneSpace = ' '
+  const fourSpace = '    '
+  const translation = '\n'
+
   let currentLang
   let set = new Set
 
   let selectedSymbol
 
   document.addEventListener('click', (e) => {
-    if (e.target.classList[0] === 'textarea') {
-      selectedSymbol = e.target.selectionStart
-    }
+    if (e.target.classList[0] === 'textarea') {selectedSymbol = e.target.selectionStart}
   })
 
   document.addEventListener('keydown', (event) => {
@@ -1072,14 +1074,22 @@ const changeLang = () => {
     switch (event.code) {
       case 'Enter':
         event.preventDefault()
-        contentTextArea.value += '\n'
-        console.log('enter')
+        selectedSymbol = contentTextArea.selectionStart
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + translation + contentTextArea.value.substring(contentTextArea.selectionStart)
+        contentTextArea.focus()
+        contentTextArea.selectionStart = selectedSymbol + 1
+        contentTextArea.selectionEnd = selectedSymbol + 1
         break;
+
       case 'Space':
         event.preventDefault()
-        contentTextArea.value += ' '
-        console.log('space')
+        selectedSymbol = contentTextArea.selectionStart
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + oneSpace + contentTextArea.value.substring(contentTextArea.selectionStart)
+        contentTextArea.focus()
+        contentTextArea.selectionStart = selectedSymbol + 1
+        contentTextArea.selectionEnd = selectedSymbol + 1
         break;
+
       case 'Backspace':
         event.preventDefault()
         contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart - 1) + contentTextArea.value.substring(contentTextArea.selectionStart)
@@ -1087,14 +1097,23 @@ const changeLang = () => {
         contentTextArea.selectionStart = selectedSymbol - 1
         contentTextArea.selectionEnd = selectedSymbol - 1
         break;
+
       case 'Delete':
         event.preventDefault()
-        contentTextArea.value = contentTextArea.value.replace(contentTextArea.value[selectedSymbol], '')
-        console.log('delete')
+        selectedSymbol = contentTextArea.selectionStart
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + contentTextArea.value.substring(contentTextArea.selectionStart + 1)
+        contentTextArea.focus()
+        contentTextArea.selectionStart = selectedSymbol
+        contentTextArea.selectionEnd = selectedSymbol
         break;
+
       case 'Tab':
         event.preventDefault()
-        console.log('tab')
+        selectedSymbol = contentTextArea.selectionStart
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + fourSpace + contentTextArea.value.substring(contentTextArea.selectionStart)
+        contentTextArea.focus()
+        contentTextArea.selectionStart = selectedSymbol + 4
+        contentTextArea.selectionEnd = selectedSymbol + 4
         break;
     }
 
@@ -1125,6 +1144,7 @@ const changeLang = () => {
           eng[i].classList.remove('show')
         }
         break;
+
       case 'eng':
         for (let i = 0; i < rus.length; i++) {
           eng[i].classList.add('show')
@@ -1315,8 +1335,8 @@ const spec = () => {
         selectedSymbol = contentTextArea.selectionStart
         contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + fourSpace + contentTextArea.value.substring(contentTextArea.selectionStart)
         contentTextArea.focus()
-        contentTextArea.selectionStart = selectedSymbol + 3
-        contentTextArea.selectionEnd = selectedSymbol + 3
+        contentTextArea.selectionStart = selectedSymbol + 4
+        contentTextArea.selectionEnd = selectedSymbol + 4
         break;
 
       case 'CapsLock':
