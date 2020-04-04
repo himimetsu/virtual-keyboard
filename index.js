@@ -1051,8 +1051,6 @@ const changeCaseCycle = (up, down) => {
   }
 }
 
-const tab = (contentTextArea) => { contentTextArea.value += '    ' }
-
 const changeLang = () => {
   const rus = document.getElementsByClassName('rus')
   const eng = document.getElementsByClassName('eng')
@@ -1147,9 +1145,7 @@ const changeCase = () => {
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Shift') {
-      if (!isShiftPressed) {
-        changeCaseCycle(up, down)
-      }
+      if (!isShiftPressed) {changeCaseCycle(up, down)}
 
       isShiftPressed = true
     }
@@ -1289,6 +1285,15 @@ const spec = () => {
   document.addEventListener('click', (e) => {
     let contentTextArea = document.getElementsByClassName('textarea')[0]
     let selectedSymbol = contentTextArea.selectionStart
+
+    if (e.target.classList[1] === 'Space') {
+      selectedSymbol = contentTextArea.selectionStart
+      contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + ' ' + contentTextArea.value.substring(contentTextArea.selectionStart)
+      contentTextArea.focus()
+      contentTextArea.selectionStart = selectedSymbol + 1
+      contentTextArea.selectionEnd = selectedSymbol + 1
+    }
+
     switch (e.target.innerText) {
       case 'Backspace':
         selectedSymbol = contentTextArea.selectionStart
@@ -1301,18 +1306,27 @@ const spec = () => {
           contentTextArea.focus()
         }
         break;
+
       case 'Tab':
-        tab(contentTextArea)
+        selectedSymbol = contentTextArea.selectionStart
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + '    ' + contentTextArea.value.substring(contentTextArea.selectionStart)
+        contentTextArea.focus()
+        contentTextArea.selectionStart = selectedSymbol + 3
+        contentTextArea.selectionEnd = selectedSymbol + 3
         break;
+
       case 'CapsLock':
         changeCaseCycle(up, down)
         break;
-      case 'Space':
-        contentTextArea.value += ' '
-        break;
+
       case 'Enter':
-        contentTextArea.value += '\n'
+        selectedSymbol = contentTextArea.selectionStart
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + '\n' + contentTextArea.value.substring(contentTextArea.selectionStart)
+        contentTextArea.focus()
+        contentTextArea.selectionStart = selectedSymbol + 1
+        contentTextArea.selectionEnd = selectedSymbol + 1
         break;
+
       case 'Del':
         selectedSymbol = contentTextArea.selectionStart
         contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + contentTextArea.value.substring(contentTextArea.selectionStart + 1)
