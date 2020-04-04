@@ -1058,6 +1058,10 @@ const changeLang = () => {
   const oneSpace = ' '
   const fourSpace = '    '
   const translation = '\n'
+  const arrowUp = '▲'
+  const arrowDown = '▼'
+  const arrowLeft = '◄'
+  const arrowRight = '►'
 
   let currentLang
   let set = new Set
@@ -1107,6 +1111,38 @@ const changeLang = () => {
         contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + fourSpace + contentTextArea.value.substring(contentTextArea.selectionStart)
         contentTextArea.selectionStart = selectedSymbol + 4
         contentTextArea.selectionEnd = selectedSymbol + 4
+        break;
+
+      case 'ArrowUp':
+        event.preventDefault()
+        selectedSymbol = contentTextArea.selectionStart
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + arrowUp + contentTextArea.value.substring(contentTextArea.selectionStart)
+        contentTextArea.selectionStart = selectedSymbol + 1
+        contentTextArea.selectionEnd = selectedSymbol + 1
+        break;
+
+      case 'ArrowDown':
+        event.preventDefault()
+        selectedSymbol = contentTextArea.selectionStart
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + arrowDown + contentTextArea.value.substring(contentTextArea.selectionStart)
+        contentTextArea.selectionStart = selectedSymbol + 1
+        contentTextArea.selectionEnd = selectedSymbol + 1
+        break;
+
+      case 'ArrowLeft':
+        event.preventDefault()
+        selectedSymbol = contentTextArea.selectionStart
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + arrowLeft + contentTextArea.value.substring(contentTextArea.selectionStart)
+        contentTextArea.selectionStart = selectedSymbol + 1
+        contentTextArea.selectionEnd = selectedSymbol + 1
+        break;
+
+      case 'ArrowRight':
+        event.preventDefault()
+        selectedSymbol = contentTextArea.selectionStart
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + arrowRight + contentTextArea.value.substring(contentTextArea.selectionStart)
+        contentTextArea.selectionStart = selectedSymbol + 1
+        contentTextArea.selectionEnd = selectedSymbol + 1
         break;
     }
 
@@ -1217,12 +1253,12 @@ const renderContainer = () => {
   const windows = document.createElement('img')
   windows.setAttribute('src', './img/windows.png')
   combinations.appendChild(windows)
-  const textWindows = document.createTextNode('Левые shift и alt')
+  const textWindows = document.createTextNode('Левые Shift и Alt')
   combinations.appendChild(textWindows)
   const mac = document.createElement('img')
   mac.setAttribute('src', './img/apple.png')
   combinations.appendChild(mac)
-  const textMac = document.createTextNode('Левые shift и option')
+  const textMac = document.createTextNode('Левые Shift и Option')
   combinations.appendChild(textMac)
   info.appendChild(combinations)
   container.appendChild(info)
