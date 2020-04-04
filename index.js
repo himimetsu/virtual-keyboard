@@ -1260,10 +1260,12 @@ const renderContainer = () => {
 
 const typeText = () => {
   let contentTextArea = document.getElementsByClassName('textarea')[0]
-  let isFocus = false
 
-  document.getElementsByTagName('textarea')[0].onfocus = () => { isFocus = true }
-  contentTextArea.addEventListener('blur', () => { isFocus = false })
+  let selectedSymbol
+
+  document.addEventListener('click', (e) => {
+    if (e.target.classList[0] === 'textarea') { selectedSymbol = e.target.selectionStart }
+  })
 
   document.addEventListener('keypress', (e) => {
     let keyCode = e.code
@@ -1280,11 +1282,13 @@ const typeText = () => {
 
     if (currentPressKey.length > 1) { currentPressKey = '' }
 
-    if (isFocus === false) {
-      contentTextArea.value += currentPressKey
-    } else {
-      // e.preventDefault()
-      contentTextArea.value += currentPressKey
+    if (e.key.length === 1) {
+      e.preventDefault()
+      selectedSymbol = contentTextArea.selectionStart
+      contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + currentPressKey + contentTextArea.value.substring(contentTextArea.selectionStart)
+      contentTextArea.focus()
+      contentTextArea.selectionStart = selectedSymbol + 1
+      contentTextArea.selectionEnd = selectedSymbol + 1
     }
   })
 
