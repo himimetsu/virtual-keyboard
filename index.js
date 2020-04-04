@@ -1286,9 +1286,13 @@ const spec = () => {
     let contentTextArea = document.getElementsByClassName('textarea')[0]
     let selectedSymbol = contentTextArea.selectionStart
 
+    const oneSpace = ' '
+    const fourSpace = '    '
+    const translation = '\n'
+
     if (e.target.classList[1] === 'Space') {
       selectedSymbol = contentTextArea.selectionStart
-      contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + ' ' + contentTextArea.value.substring(contentTextArea.selectionStart)
+      contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + oneSpace + contentTextArea.value.substring(contentTextArea.selectionStart)
       contentTextArea.focus()
       contentTextArea.selectionStart = selectedSymbol + 1
       contentTextArea.selectionEnd = selectedSymbol + 1
@@ -1309,7 +1313,7 @@ const spec = () => {
 
       case 'Tab':
         selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + '    ' + contentTextArea.value.substring(contentTextArea.selectionStart)
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + fourSpace + contentTextArea.value.substring(contentTextArea.selectionStart)
         contentTextArea.focus()
         contentTextArea.selectionStart = selectedSymbol + 3
         contentTextArea.selectionEnd = selectedSymbol + 3
@@ -1321,7 +1325,7 @@ const spec = () => {
 
       case 'Enter':
         selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + '\n' + contentTextArea.value.substring(contentTextArea.selectionStart)
+        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + translation + contentTextArea.value.substring(contentTextArea.selectionStart)
         contentTextArea.focus()
         contentTextArea.selectionStart = selectedSymbol + 1
         contentTextArea.selectionEnd = selectedSymbol + 1
