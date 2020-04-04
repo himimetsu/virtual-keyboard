@@ -1074,7 +1074,6 @@ const changeLang = () => {
         event.preventDefault()
         selectedSymbol = contentTextArea.selectionStart
         contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + translation + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.focus()
         contentTextArea.selectionStart = selectedSymbol + 1
         contentTextArea.selectionEnd = selectedSymbol + 1
         break;
@@ -1083,7 +1082,6 @@ const changeLang = () => {
         event.preventDefault()
         selectedSymbol = contentTextArea.selectionStart
         contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + oneSpace + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.focus()
         contentTextArea.selectionStart = selectedSymbol + 1
         contentTextArea.selectionEnd = selectedSymbol + 1
         break;
@@ -1091,7 +1089,6 @@ const changeLang = () => {
       case 'Backspace':
         event.preventDefault()
         contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart - 1) + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.focus()
         contentTextArea.selectionStart = selectedSymbol - 1
         contentTextArea.selectionEnd = selectedSymbol - 1
         break;
@@ -1100,7 +1097,6 @@ const changeLang = () => {
         event.preventDefault()
         selectedSymbol = contentTextArea.selectionStart
         contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + contentTextArea.value.substring(contentTextArea.selectionStart + 1)
-        contentTextArea.focus()
         contentTextArea.selectionStart = selectedSymbol
         contentTextArea.selectionEnd = selectedSymbol
         break;
@@ -1109,7 +1105,6 @@ const changeLang = () => {
         event.preventDefault()
         selectedSymbol = contentTextArea.selectionStart
         contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + fourSpace + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.focus()
         contentTextArea.selectionStart = selectedSymbol + 4
         contentTextArea.selectionEnd = selectedSymbol + 4
         break;
