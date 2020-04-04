@@ -93,3 +93,7 @@ body {
 .Space {
   width: 365px;
 }
+
+.rus, .eng {
+  user-select: none;
+}

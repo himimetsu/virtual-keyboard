@@ -1,7 +1,7 @@
 window.onload = function () {
   renderContainer()
   typeText()
-  changeLang()
+  pressControlKeys()
   changeCase()
   activePressKey()
   keyClick()
@@ -1051,7 +1051,7 @@ const changeCaseCycle = (up, down) => {
   }
 }
 
-const changeLang = () => {
+const pressControlKeys = () => {
   const rus = document.getElementsByClassName('rus')
   const eng = document.getElementsByClassName('eng')
 
@@ -1359,6 +1359,19 @@ const typeText = () => {
 const keyClick = () => {
   const up = document.getElementsByClassName('up')
   const down = document.getElementsByClassName('down')
+  const keyboard = document.getElementsByClassName('keyboard')[0]
+
+  let currentClick
+
+  keyboard.addEventListener('click', (e) => {
+    if (e.target.classList[0] === 'down' || e.target.classList[0] === 'up') {
+      currentClick = e.target.parentNode.parentNode
+    } else {
+      currentClick = e.target
+    }
+    currentClick.classList.add('active')
+    setTimeout(() => {currentClick.classList.remove('active')}, 200)
+  })
 
   document.addEventListener('click', (e) => {
     let contentTextArea = document.getElementsByClassName('textarea')[0]
