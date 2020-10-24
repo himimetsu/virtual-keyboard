@@ -1,0 +1,17 @@
+.enter-text {
+  margin-top: 40px;
+  text-align: center;
+
+  .textarea {
+    width: 800px;
+    height: 300px;
+    padding: 10px;
+    border: 3px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: #888888;
+    color: white;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    font-size: 18px;
+  }
+}
