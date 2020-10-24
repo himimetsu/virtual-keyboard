@@ -1,4 +1,4 @@
-import './keyboard.scss';
+import './Keyboard.scss';
 import { state, specKeys } from '../../data';
 
 const renderVirtualKeyboard = () => {
