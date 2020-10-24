@@ -1,0 +1,49 @@
+.keyboard {
+  width: 800px;
+  margin-top: 50px;
+  border: 3px solid black;
+  border-radius: 5px;
+  background: #888888;
+
+  .row {
+    display: flex;
+    justify-content: center;
+
+    .key {
+      height: 40px;
+      width: 44px;
+      margin: 5px;
+      font-size: 14px;
+      text-align: center;
+      line-height: 40px;
+      font-weight: 900;
+      color: white;
+      background: #444444;
+      border-radius: 5px;
+      user-select: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #58FAAC;
+      }
+
+      .rus, .eng {
+        user-select: none;
+      }
+    }
+
+    .key.active {
+      border-radius: 20px;
+      background: #00ff7f;
+    }
+
+    .Tab, .Backspace, .CapsLock, .ShiftLeft, .ShiftRight, .Enter {
+      width: 100px;
+    }
+
+    .Space {
+      width: 310px;
+      font-size: 0px;
+    }
+  }
+}
