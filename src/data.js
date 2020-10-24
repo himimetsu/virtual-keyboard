@@ -1,13 +1,4 @@
-window.onload = function () {
-  renderContainer()
-  typeText()
-  pressControlKeys()
-  changeCase()
-  activePressKey()
-  keyClick()
-}
-
-const state = {
+export const state = {
   row1: [
     {
       name: 'Backquote',
@@ -946,18 +937,34 @@ const state = {
       ],
     },
     {
+      name: 'Lang',
+      code: 'Lang',
+      content: [
+        {
+          lang: 'rus',
+          down: 'RU',
+          up: 'RU',
+        },
+        {
+          lang: 'eng',
+          down: 'EN',
+          up: 'EN',
+        }
+      ],
+    },
+    {
       name: 'Space',
       code: 'Space',
       content: [
         {
           lang: 'rus',
-          down: ' ',
-          up: ' ',
+          down: '_',
+          up: '_',
         },
         {
           lang: 'eng',
-          down: ' ',
-          up: ' ',
+          down: '_',
+          up: '_',
         }
       ],
     },
@@ -1041,394 +1048,20 @@ const state = {
         }
       ],
     },
-  ]
-}
-
-const changeCaseCycle = (up, down) => {
-  for (let i = 0; i < up.length; i++) {
-    up[i].classList.toggle('hidden')
-    down[i].classList.toggle('hidden')
-  }
-}
-
-const pressControlKeys = () => {
-  const rus = document.getElementsByClassName('rus')
-  const eng = document.getElementsByClassName('eng')
-
-  const oneSpace = ' '
-  const fourSpace = '    '
-  const translation = '\n'
-  const arrowUp = '▲'
-  const arrowDown = '▼'
-  const arrowLeft = '◄'
-  const arrowRight = '►'
-
-  let currentLang
-  let set = new Set
-
-  let selectedSymbol
-
-  document.addEventListener('keydown', (event) => {
-    let contentTextArea = document.getElementsByClassName('textarea')[0]
-
-    selectedSymbol = contentTextArea.selectionStart
-
-    switch (event.code) {
-      case 'Enter':
-        event.preventDefault()
-        selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + translation + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.selectionStart = selectedSymbol + 1
-        contentTextArea.selectionEnd = selectedSymbol + 1
-        break;
-
-      case 'Space':
-        event.preventDefault()
-        selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + oneSpace + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.selectionStart = selectedSymbol + 1
-        contentTextArea.selectionEnd = selectedSymbol + 1
-        break;
-
-      case 'Backspace':
-        event.preventDefault()
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart - 1) + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.selectionStart = selectedSymbol - 1
-        contentTextArea.selectionEnd = selectedSymbol - 1
-        break;
-
-      case 'Delete':
-        event.preventDefault()
-        selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + contentTextArea.value.substring(contentTextArea.selectionStart + 1)
-        contentTextArea.selectionStart = selectedSymbol
-        contentTextArea.selectionEnd = selectedSymbol
-        break;
-
-      case 'Tab':
-        event.preventDefault()
-        selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + fourSpace + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.selectionStart = selectedSymbol + 4
-        contentTextArea.selectionEnd = selectedSymbol + 4
-        break;
-
-      case 'ArrowUp':
-        event.preventDefault()
-        selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + arrowUp + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.selectionStart = selectedSymbol + 1
-        contentTextArea.selectionEnd = selectedSymbol + 1
-        break;
-
-      case 'ArrowDown':
-        event.preventDefault()
-        selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + arrowDown + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.selectionStart = selectedSymbol + 1
-        contentTextArea.selectionEnd = selectedSymbol + 1
-        break;
-
-      case 'ArrowLeft':
-        event.preventDefault()
-        selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + arrowLeft + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.selectionStart = selectedSymbol + 1
-        contentTextArea.selectionEnd = selectedSymbol + 1
-        break;
-
-      case 'ArrowRight':
-        event.preventDefault()
-        selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + arrowRight + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.selectionStart = selectedSymbol + 1
-        contentTextArea.selectionEnd = selectedSymbol + 1
-        break;
-    }
-
-    if (event.key === 'Alt') { event.preventDefault() }
-
-    if (event.key == 'Shift' || event.key == 'Alt') { set.add(event.key) }
-
-    if (set.size == 2) {
-      for (let i = 0; i < rus.length; i++) {
-        rus[i].classList.toggle('hidden')
-        eng[i].classList.toggle('hidden')
-        rus[i].classList.toggle('show')
-        eng[i].classList.toggle('show')
-      }
-      set = new Set
-      currentLang = document.getElementsByClassName('show')[0].classList[0]
-      sessionStorage.setItem('language', currentLang)
-    }
-  })
-
-  if (sessionStorage.getItem('language')) {
-    switch (sessionStorage.getItem('language')) {
-      case 'rus':
-        for (let i = 0; i < rus.length; i++) {
-          rus[i].classList.add('show')
-          rus[i].classList.remove('hidden')
-          eng[i].classList.add('hidden')
-          eng[i].classList.remove('show')
-        }
-        break;
-
-      case 'eng':
-        for (let i = 0; i < rus.length; i++) {
-          eng[i].classList.add('show')
-          eng[i].classList.remove('hidden')
-          rus[i].classList.add('hidden')
-          rus[i].classList.remove('show')
-        }
-        break;
-    }
-  }
-}
-
-const changeCase = () => {
-  const up = document.getElementsByClassName('up')
-  const down = document.getElementsByClassName('down')
-
-  let isShiftPressed = false
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Shift') {
-      if (!isShiftPressed) {changeCaseCycle(up, down)}
-
-      isShiftPressed = true
-    }
-  })
-
-  document.onkeyup = (e) => {
-    if (e.key === 'Shift') {
-      isShiftPressed = false
-      changeCaseCycle(up, down)
-    }
-
-    if (e.code == 'CapsLock') {
-      changeCaseCycle(up, down)
-    }
-  }
-}
-
-const activePressKey = () => {
-  document.addEventListener('keydown', (e) => {
-    let currentClick = document.getElementsByClassName(e.code)
-    if (currentClick.length > 0) { currentClick[0].classList.add('active') }
-  })
-
-  document.addEventListener('keyup', (e) => {
-    let currentClick = document.getElementsByClassName(e.code)
-    if (currentClick.length > 0) { currentClick[0].classList.remove('active') }
-  })
-}
-
-const renderContainer = () => {
-  const container = document.createElement('div')
-  container.classList.add('container')
-  document.body.appendChild(container)
-
-  const textContent = document.createElement('div')
-  textContent.classList.add('textContent')
-
-  const text = document.createElement('textarea')
-  text.classList.add('textarea')
-  textContent.appendChild(text)
-
-  container.appendChild(textContent)
-
-  const info = document.createElement('div')
-  info.classList.add('info')
-  const os = document.createElement('p')
-  const textOS = document.createTextNode('Клавиатура создана в операционной системе Windows.')
-  os.appendChild(textOS)
-  info.appendChild(os)
-  const description = document.createElement('p')
-  const textDescription = document.createTextNode('Для переключения языка используйте следующие комбинации:')
-  description.appendChild(textDescription)
-  os.appendChild(description)
-  const combinations = document.createElement('div')
-  combinations.classList.add('combinations')
-  const windows = document.createElement('img')
-  windows.setAttribute('src', './img/windows.png')
-  combinations.appendChild(windows)
-  const textWindows = document.createTextNode('Левые Shift и Alt')
-  combinations.appendChild(textWindows)
-  const mac = document.createElement('img')
-  mac.setAttribute('src', './img/apple.png')
-  combinations.appendChild(mac)
-  const textMac = document.createTextNode('Левые Shift и Option')
-  combinations.appendChild(textMac)
-  info.appendChild(combinations)
-  container.appendChild(info)
-
-  const keyboard = document.createElement('div')
-  keyboard.classList.add('keyboard')
-  container.appendChild(keyboard)
-
-  for (let key in state) {
-    const row = document.createElement('div')
-    row.classList.add('row')
-    keyboard.appendChild(row)
-
-    state[key].map((item) => {
-      const key = document.createElement('div')
-      key.classList.add('key')
-      key.classList.add(item.name)
-      row.appendChild(key)
-
-      const rus = document.createElement('span')
-      rus.classList.add('rus')
-      rus.classList.add('hidden')
-      key.appendChild(rus)
-
-      const eng = document.createElement('span')
-      eng.classList.add('eng')
-      eng.classList.add('show')
-      key.appendChild(eng)
-
-      for (let i = 0; i < item.content.length; i++) {
-        const down = document.createElement('span')
-        down.classList.add('down')
-        const downText = document.createTextNode(item.content[i].down)
-        down.appendChild(downText)
-
-        const up = document.createElement('span')
-        up.classList.add('up')
-        up.classList.add('hidden')
-        const upText = document.createTextNode(item.content[i].up)
-        up.appendChild(upText)
-
-        const currentString = [
-          rus,
-          eng
-        ]
-
-        currentString[i].appendChild(down)
-        currentString[i].appendChild(up)
-      }
-    })
-  }
-}
-
-const typeText = () => {
-  let contentTextArea = document.getElementsByClassName('textarea')[0]
-
-  let selectedSymbol
-
-  document.addEventListener('click', (e) => {
-    if (e.target.classList[0] === 'textarea') { selectedSymbol = e.target.selectionStart }
-  })
-
-  document.addEventListener('keypress', (e) => {
-    let keyCode = e.code
-
-    let childsKey = Array.from(document.getElementsByClassName(`${keyCode}`)[0].children)
-
-    let currentPressKey
-
-    childsKey.map((item, i) => {
-      if (item.classList[1] === 'show') {
-        currentPressKey = childsKey[i].innerText
-      }
-    })
-
-    if (currentPressKey.length > 1) { currentPressKey = '' }
-
-    if (e.key.length === 1) {
-      e.preventDefault()
-      selectedSymbol = contentTextArea.selectionStart
-      contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + currentPressKey + contentTextArea.value.substring(contentTextArea.selectionStart)
-      contentTextArea.focus()
-      contentTextArea.selectionStart = selectedSymbol + 1
-      contentTextArea.selectionEnd = selectedSymbol + 1
-    }
-  })
-
-  document.addEventListener('click', (e) => {
-    let clickedItem = e.target.classList[0]
-
-    if (clickedItem === 'down' || clickedItem === 'up' || clickedItem === 'key') {
-      let currentSymbol = e.toElement.innerText
-      if (currentSymbol.length == 1) { contentTextArea.value += currentSymbol }
-    }
-  })
-}
-
-const keyClick = () => {
-  const up = document.getElementsByClassName('up')
-  const down = document.getElementsByClassName('down')
-  const keyboard = document.getElementsByClassName('keyboard')[0]
-
-  let currentClick
-
-  keyboard.addEventListener('click', (e) => {
-    if (e.target.classList[0] === 'down' || e.target.classList[0] === 'up') {
-      currentClick = e.target.parentNode.parentNode
-    } else {
-      currentClick = e.target
-    }
-    currentClick.classList.add('active')
-    setTimeout(() => {currentClick.classList.remove('active')}, 200)
-  })
-
-  document.addEventListener('click', (e) => {
-    let contentTextArea = document.getElementsByClassName('textarea')[0]
-    let selectedSymbol = contentTextArea.selectionStart
-
-    const oneSpace = ' '
-    const fourSpace = '    '
-    const translation = '\n'
-
-    if (e.target.classList[1] === 'Space') {
-      selectedSymbol = contentTextArea.selectionStart
-      contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + oneSpace + contentTextArea.value.substring(contentTextArea.selectionStart)
-      contentTextArea.focus()
-      contentTextArea.selectionStart = selectedSymbol + 1
-      contentTextArea.selectionEnd = selectedSymbol + 1
-    }
-
-    switch (e.target.innerText) {
-      case 'Backspace':
-        selectedSymbol = contentTextArea.selectionStart
-        if (selectedSymbol > 0) {
-          contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart - 1) + contentTextArea.value.substring(contentTextArea.selectionStart)
-          contentTextArea.focus()
-          contentTextArea.selectionStart = selectedSymbol - 1
-          contentTextArea.selectionEnd = selectedSymbol - 1
-        } else {
-          contentTextArea.focus()
-        }
-        break;
-
-      case 'Tab':
-        selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + fourSpace + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.focus()
-        contentTextArea.selectionStart = selectedSymbol + 4
-        contentTextArea.selectionEnd = selectedSymbol + 4
-        break;
-
-      case 'CapsLock':
-        changeCaseCycle(up, down)
-        break;
-
-      case 'Enter':
-        selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + translation + contentTextArea.value.substring(contentTextArea.selectionStart)
-        contentTextArea.focus()
-        contentTextArea.selectionStart = selectedSymbol + 1
-        contentTextArea.selectionEnd = selectedSymbol + 1
-        break;
-
-      case 'Del':
-        selectedSymbol = contentTextArea.selectionStart
-        contentTextArea.value = contentTextArea.value.substring(0, contentTextArea.selectionStart) + contentTextArea.value.substring(contentTextArea.selectionStart + 1)
-        contentTextArea.focus()
-        contentTextArea.selectionStart = selectedSymbol
-        contentTextArea.selectionEnd = selectedSymbol
-        break;
-    }
-  })
-}
+  ],
+};
+
+export const specKeys = [
+  'Tab',
+  'Backspace',
+  'CapsLock',
+  'Shift',
+  'Ctrl',
+  'Win',
+  'Alt',
+  'Del',
+  'Enter',
+  '_',
+  'RU',
+  'EN',
+];
